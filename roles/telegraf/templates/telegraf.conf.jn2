@@ -430,7 +430,7 @@
 #   ## TCP endpoint for your graphite instance.
 #   ## If multiple endpoints are configured, output will be load balanced.
 #   ## Only one of the endpoints will be written to with each iteration.
-   servers = ["192.168.100.182:2003"]
+   servers = ["10.7.2.30:2003"]
 #   ## Prefix metrics name
 #   prefix = ""
 #   ## Graphite output template
