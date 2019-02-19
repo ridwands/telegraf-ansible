@@ -1,0 +1,26 @@
+---
+- name: Repo Telegraf
+  get_url:
+    url: https://repos.influxdata.com/influxdb.key
+    dest: /home/influxdb.key
+- name: Add Key 
+  command: apt-key add /home/influxdb.key
+- name: Install Repo Telegraf
+  copy:
+    content: deb https://repos.influxdata.com/ubuntu xenial stable
+    dest: /etc/apt/sources.list.d/influxdb.list
+- name: Update Repo
+  command: apt update
+- name: Install Telegraf
+  apt:
+    name: telegraf
+    state: present
+  notify: "Restart Telegraf"
+- name: Templating Telegraf
+  template:
+    src: telegraf.conf.jn2
+    dest: /etc/telegraf/telegraf.conf
+- name: Install Golang
+  apt:
+    name: golang-go
+    state: present

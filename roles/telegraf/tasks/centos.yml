@@ -1,0 +1,23 @@
+- name: Repo Telegraf
+  copy:
+    src: influxdb.repo
+    dest: /etc/yum.repos.d/influxdb.repo
+- name: Makecache
+  command: yum makecache fast
+- name: Install Telegraf
+  yum:
+    name: telegraf
+    state: present
+- name: Templating Telegraf
+  template:
+    src: telegraf.conf.jn2
+    dest: /etc/telegraf/telegraf.conf
+  notify: "Restart Telegraf"
+- name: Epel Release
+  yum:
+    name: epel-release
+    state: present
+- name: Install Golang
+  yum:
+    name: golang-bin.x86_64 
+    state: present

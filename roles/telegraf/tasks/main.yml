@@ -1,0 +1,11 @@
+---
+# tasks file for testing
+- name: "Install on Centos"
+  include_tasks: "centos.yml"
+  when:
+    - ansible_distribution == "CentOS"
+
+- name: "Install on Ubuntu"
+  include_tasks: "ubuntu.yml"
+  when:
+    - ansible_distribution == "Ubuntu"
